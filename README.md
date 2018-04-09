@@ -114,10 +114,11 @@ curly braces. In the above example, the variable declarations are _not_
 expressions, so the value of `5 * 5 - 5` is returned.  
 
 **Note**: The statement above _implicitly_ returns 20 (the value returned by
-`5 * 5 - 5`, when evaluated). With things like functions, which we will discuss
-in an upcoming lesson, we need to _explicitly_ use the word `return` to tell
+`5 * 5 - 5`, when evaluated). Functions, which we will discuss
+in an upcoming lesson, also contain all of their code inside curly braces, but
+for functions, we need to _explicitly_ use the word `return` to tell
 JavaScript what we want the output to be (if we want one, at all).  Just
-remember that the implicit return is something unique to block statements like
+remember that the _implicit return is something unique to block statements_ like
 the ones we use for `if...else` and loop statements.
 
 ## Truthiness and falsiness
