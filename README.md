@@ -1,6 +1,6 @@
 # JavaScript Conditionals 
 ## Problem Statement 
-In all facets of life, we constantly make conditional choices:
+If you're hungry, you make a sandwich. If the traffic light is green, you press the gas pedal. If your rent is due, then you pay your rent. This breaks down into a lot of conditional choices:
 - `if` hungry :arrow_right: make sandwich.
   + `else` :arrow_right: don't make sandwich.
 - `if` light is green :arrow_right: press gas pedal.
@@ -484,7 +484,17 @@ canDrink;
 // => undefined
 ```
 
-We specified `true` as the value to `switch` on. All of our `case`s are comparisons, and if the comparison returns `true` its statements will be run. Because we did not include `break` statements, we allow the JavaScript engine to continue cascading down the `case`s **even if it matches one or more**. With `age` set to `20` in the above example, the first `case`, `age >= 21`, returns `false` and so the assignment of `canDrink` never happens. The engine then proceeds to the next `case`, `age >= 18`, which returns `true`, assigning the value `true` to `isAdult` and `canEnlist`. Since it encounters no `break` statement, the JavaScript engine then evaluates the final `case`, `age >= 16`, which also returns `true`. It assigns `true` to `canVote`, reaches the end of the `switch` statement, and exits.
+We specified `true` as the value to `switch` on. All of our `case`s are
+comparisons, and if the comparison returns `true` its statements will be run.
+Because we did not include `break` statements, we allow the JavaScript engine to
+continue cascading down the `case`s **even if it matches one or more**. With
+`age` set to `20` in the above example, the first `case`, `age >= 21`, returns
+`false` and so the assignment of `canDrink` never happens. The engine then
+proceeds to the next `case`, `age >= 18`, which returns `true`, assigning the
+value `true` to `isAdult` and `canEnlist`. Since it encounters no `break`
+statement, the JavaScript engine then evaluates the final `case`, `age >= 16`,
+which also returns `true`. It assigns `true` to `canVote`, reaches the end of
+the `switch` statement, and exits.
 
 #### `default`
 The `default` keyword specifies a set of statements to run after all of the
@@ -511,7 +521,8 @@ response;
 // => "Sorry, I don't know how to respond to that mood."
 ```
 
-It's typically safer to include `break` statements because it helps avoid bugs like this:
+It's typically safer to include `break` statements because it helps avoid bugs
+like this:
 
 ```js
 const mood = 'happy';
@@ -538,7 +549,8 @@ The `'happy'` case matches and assigns the string `'Heck yea; be happy!'` to
 to that mood."` to `response`. Whoops!
 
 ### Ternary operator
-The ternary operator, the final piece of the conditional puzzle, is a good way to represent an `if...else` statement in a single line of code:
+The ternary operator, the final piece of the conditional puzzle, is a good way
+to represent an `if...else` statement in a single line of code:
 
 ```js
 condition ? expression1 : expression2;
@@ -601,7 +613,8 @@ more difficult to quickly interpret than a regular old `if...else`, so make
 sure the reduction in code is worth any potential reduction in readability.
 
 ### Code Examples
-There are tons of control flow structures in the Flatbook project code base, a project that emulates the basic functionality of Facebook.
+There are tons of control flow structures in the Flatbook project code base, a
+project that emulates the basic functionality of Facebook.
 
 #### `if...else`
 When a guest tries to log in, check whether the provided email and password
@@ -692,8 +705,11 @@ permissionsLevel;
 ```
 
 ## Conclusion 
-It's easy to imagine hundreds of other conditionals that go into the
-functioning of a large site like Flatbook. Conditional statements make the internet go round, so study up! The more comfortable you are with controlling the flow of your code with conditional statements, the more complex websites you will be able to build.
+It's easy to imagine hundreds of other conditionals that go into the functioning
+of a large site like Flatbook. Conditional statements make the internet go
+round, so study up! The more comfortable you are with controlling the flow of
+your code with conditional statements, the more complex websites you will be
+able to build.
 
 ## Resources
 - MDN
