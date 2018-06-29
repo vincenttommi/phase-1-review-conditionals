@@ -1,16 +1,6 @@
-# JavaScript Conditionals
-
-## Objectives
-1. Explain what constitutes an expression in JavaScript.
-2. Organize code using block statements.
-3. Describe the difference between truthy and falsy values.
-4. Employ `if...else` statements to conditionally execute blocks of code.
-5. Use a `switch` statement to selectively execute code based on the value of
-an expression.
-6. Rewrite an `if...else` as a one-liner with the ternary operator.
-
-## Overview
-In all facets of life, we constantly make conditional choices:
+# JavaScript Conditionals 
+## Problem Statement 
+If you're hungry, you make a sandwich. If the traffic light is green, you press the gas pedal. If your rent is due, then you pay your rent. This breaks down into a lot of conditional choices:
 - `if` hungry :arrow_right: make sandwich.
   + `else` :arrow_right: don't make sandwich.
 - `if` light is green :arrow_right: press gas pedal.
@@ -25,7 +15,15 @@ _if_ a certain condition is met. In the programming world, this is called
 Before we dive into JavaScript's conditional structures, let's go over a few
 concepts that provide the syntactic underpinnings.
 
-## Expressions
+
+## Objectives
+1. Explain what constitutes an expression in JavaScript
+2. Organize code using block statements
+3. Describe the difference between truthy and falsy values
+4. Learn to use conditional statements
+
+
+## Explain What Constitutes an Expression in JavaScript 
 A JavaScript expression is **a unit of code that returns a value**. Primitive
 values are expressions because they resolve to a value:
 
@@ -86,10 +84,10 @@ fullName;
 // => "Ada Lovelace"
 ```
 
-## Block statements
+## Organize Code Using Block Statements
 
 A block statement is a pair of curly braces (`{ }`) used to group JavaScript
-statements. It plays a featured role in conditional statements, loops, and
+statements. It plays a role in conditional statements, loops, and
 functions.
 
 ```js
@@ -110,21 +108,21 @@ functions.
 ```
 
 Block statements return the value of the last evaluated expression inside the
-curly braces. In the above example, the variable declarations are _not_
-expressions, so the value of `5 * 5 - 5` is returned.  
+curly braces. Remember, the variable declarations are _not_ expressions, so the
+value of `5 * 5 - 5` is returned.  
 
-**Note**: The statement above _implicitly_ returns 20 (the value returned by
-`5 * 5 - 5`, when evaluated). Functions, which we will discuss
-in an upcoming lesson, also contain all of their code inside curly braces, but
-for functions, we need to _explicitly_ use the word `return` to tell
-JavaScript what we want the output to be (if we want one, at all).  Just
-remember that the _implicit return is something unique to block statements_ like
-the ones we use for `if...else` and loop statements.
+**Note**: The statement above _implicitly_ returns 20 (the value returned by `5 * 5 - 5`,
+when evaluated). Functions, which we will discuss in an upcoming lesson, also
+contain all of their code inside curly braces, but for functions, we need to
+_explicitly_ use the word `return` to tell JavaScript what we want the output to
+be (if we want one, at all).  Just remember that the _implicit return is
+something unique to block statements_ like the ones we use for `if...else` and
+loop statements.
 
-## Truthiness and falsiness
+## Describe the Difference Between Truthy and Falsy Values
 Truthiness and falsiness indicate what happens when the value is converted into
 a boolean. If, upon conversion, the value becomes `true`, we say that it's a
-**truthy** value. If it becomes `false`, we say that it's **falsy**.
+**truthy** value. If it becomes `false`, we say that it's **falsy**. 
 
 In JavaScript, the following values are **falsy**:
 - `false`
@@ -172,16 +170,16 @@ Boolean( { firstName: 'Brendan', lastName: 'Eich' } );
 // => true
 ```
 
-***NOTE***: `document.all` is also falsy, but don't worry about it for now. (Or
-  ever, really — it's an imperfect solution for legacy code compatibility.)
+***NOTE***: `document.all` is also falsy, but don't worry about it for now. (Or ever, really —
+it's an imperfect solution for legacy code compatibility.)
 
 Ready to put that killer new vocabulary to the test? Here we go!
 
-## Conditional statements
+## Learn to Use Conditional Statements 
 In JavaScript, we use three structures for implementing condition-based control
-flow: the `if...else` statement, `switch` statement, and ternary operator.
+flow: the `if...else` statement, `switch` statement, and ternary operator. 
 
-### `if` statement
+### `if` statement 
 `if` statements are the most common type of conditional, and they're pretty
 straightforward:
 
@@ -242,7 +240,7 @@ isAdult;
 // => false
 ```
 
-#### Nested conditionals
+#### Nested Conditionals
 If we have multiple overlapping conditions, we can employ nested conditional
 statements. For example, instead of just deciding whether the passed-in `age`
 meets the criteria for `isAdult`, let's add in some other hallmarks of
@@ -394,7 +392,13 @@ switch (order) {
     console.log("Sorry, that's not on the menu right now.");
     break;
 }
+```
+If we'd like to write out the same code with an `if` conditional, it will look like this:
 
+```js
+const order = 'cheeseburger';
+
+let ingredients;
 if (order === 'cheeseburger') {
   ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
 } else if (order === 'hamburger') {
@@ -434,7 +438,7 @@ switch (age) {
 
 The `default` and `break` keywords are both optional in basic `switch`
 statements, but useful.  In more complicated statements, they become necessary
-to ensure the correct flow
+to ensure the correct flow.
 
 #### `break`
 When the JavaScript engine reaches a `break`, it exits the entire `switch`
@@ -481,8 +485,8 @@ canDrink;
 ```
 
 We specified `true` as the value to `switch` on. All of our `case`s are
-comparisons, and if the comparison returns `true` its statement(s) will be run.
-Because we forwent `break` statements, we allow the JavaScript engine to
+comparisons, and if the comparison returns `true` its statements will be run.
+Because we did not include `break` statements, we allow the JavaScript engine to
 continue cascading down the `case`s **even if it matches one or more**. With
 `age` set to `20` in the above example, the first `case`, `age >= 21`, returns
 `false` and so the assignment of `canDrink` never happens. The engine then
@@ -608,10 +612,11 @@ gets read (by yourself and others) **far** more than once. The ternary is often
 more difficult to quickly interpret than a regular old `if...else`, so make
 sure the reduction in code is worth any potential reduction in readability.
 
-## Flatbook examples
-There are tons of control flow structures in the Flatbook code base.
+### Code Examples
+There are tons of control flow structures in the Flatbook project code base, a
+project that emulates the basic functionality of Facebook.
 
-### `if...else`
+#### `if...else`
 When a guest tries to log in, check whether the provided email and password
 match an active account:
 
@@ -699,8 +704,12 @@ permissionsLevel;
 // => 20
 ```
 
-It's easy to imagine hundreds of other conditionals that go into the
-functioning of a large site like Flatbook. They're ubiquitous, so study up!
+## Conclusion 
+It's easy to imagine hundreds of other conditionals that go into the functioning
+of a large site like Flatbook. Conditional statements make the internet go
+round, so study up! The more comfortable you are with controlling the flow of
+your code with conditional statements, the more complex websites you will be
+able to build.
 
 ## Resources
 - MDN
