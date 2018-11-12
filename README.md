@@ -254,18 +254,19 @@ isAdult;
 If we have multiple overlapping conditions, we can employ nested conditional
 statements. For example, instead of just deciding whether the passed-in `age`
 meets the criteria for `isAdult`, let's add in some other hallmarks of
-burgeoning adulthood (in American society, at least): `canVote`, `canEnlist`,
-and `canDrink`. 16-year-olds can vote; 18-year-olds can vote, enlist, and are
-legal adults; and 21-year-olds can vote, enlist, are legal adults, and can
-drink. Let's nest those bad boys up:
+burgeoning adulthood (in American society, at least): `canWork`, `canEnlist`,
+and `canDrink`. 16-year-olds can legally work; 18-year-olds can work, enlist, and are
+legal adults; and 21-year-olds can work, enlist, are legal adults, and can
+drink (at the federally set minimum age, although there can be state-to-state exceptions
+for these laws). Let's use these conditions in a nesting example:
 
 ```js
 const age = 17;
 
-let isAdult, canVote, canEnlist, canDrink;
+let isAdult, canWork, canEnlist, canDrink;
 
 if (age >= 16) {
-	canVote = true;
+	canWork = true;
 
 	if (age >= 18) {
 		isAdult = true;
@@ -280,7 +281,7 @@ if (age >= 16) {
 isAdult;
 // => undefined
 
-canVote;
+canWork;
 // => true
 
 canEnlist;
@@ -297,26 +298,26 @@ Another way to represent multiple possible conditions is with `else if` clauses:
 ```js
 const age = 20;
 
-let isAdult, canVote, canEnlist, canDrink;
+let isAdult, canWork, canEnlist, canDrink;
 
 if (age >= 21) {
 	isAdult = true;
-	canVote = true;
+	canWork = true;
 	canEnlist = true;
 	canDrink = true;
 } else if (age >= 18) {
 	isAdult = true;
-	canVote = true;
+	canWork = true;
 	canEnlist = true;
 } else if (age >= 16) {
-	canVote = true;
+	canWork = true;
 }
 // => true
 
 isAdult;
 // => true
 
-canVote;
+canWork;
 // => true
 
 canEnlist;
@@ -494,7 +495,7 @@ statement:
 ```js
 const age = 20;
 
-let isAdult, canVote, canEnlist, canDrink;
+let isAdult, canWork, canEnlist, canDrink;
 
 switch (true) {
 	case age >= 21:
@@ -503,14 +504,14 @@ switch (true) {
 		isAdult = true;
 		canEnlist = true;
 	case age >= 16:
-		canVote = true;
+		canWork = true;
 }
 // => true
 
 isAdult;
 // => true
 
-canVote;
+canWork;
 // => true
 
 canEnlist;
@@ -529,7 +530,7 @@ With `age` set to `20` in the above example, the first `case`, `age >= 21`,
 returns `false` and so the assignment of `canDrink` never happens. The engine
 then proceeds to the next `case`, `age >= 18`, which returns `true`, assigning
 the value `true` to `isAdult` and `canEnlist`. Since it encounters no `break`
-statement, `canVote` is then set to true in the last case statement.
+statement, `canWork` is then set to true in the last case statement.
 
 #### `default`
 
@@ -628,14 +629,14 @@ const age = 17;
 
 const isAdult = age >= 18 ? true : false;
 
-const canVote = age >= 16 ? 1 === 1 : 1 !== 1;
+const canWork = age >= 16 ? 1 === 1 : 1 !== 1;
 
 const canEnlist = isAdult ? true : false;
 
 isAdult;
 // => false
 
-canVote;
+canWork;
 // => true
 
 canEnlist;
