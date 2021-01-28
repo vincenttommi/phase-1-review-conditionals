@@ -24,10 +24,10 @@ Writing code involves the same type of logic — we only want an action to happ
 _if_ a certain condition is met. In the programming world, this is called
 **control flow** because, well, it helps _control_ the _flow_ of an application.
 
-Before we dive into JavaScript's conditional structures, let's go over a few
+Before we dive into JavaScript's conditional structures, let's review a few
 concepts that provide the syntactic underpinnings.
 
-## Explain What Constitutes an Expression in JavaScript
+## Review What Constitutes an Expression in JavaScript
 
 A JavaScript expression is **a unit of code that returns a value**. Primitive
 values are expressions because they resolve to a value:
@@ -68,6 +68,7 @@ boolean `true`:
 Variable declarations are NOT expressions...
 
 ```js
+const greeting = "Hello!";
 let answer;
 ```
 
@@ -79,8 +80,8 @@ answer = 42;
 // => 42
 ```
 
-Finally, references to variables are also expressions, resolving to the value
-contained in the variable:
+Finally, variable lookups are also expressions, resolving to the value contained
+in the variable:
 
 ```js
 const fullName = 'Ada Lovelace';
@@ -111,7 +112,7 @@ statements. It plays a role in conditional statements, loops, and functions.
 // => 20
 ```
 
-Block statements return the value of the last evaluated expression inside the
+Block statements return the value of the *last evaluated expression* inside the
 curly braces. Remember, the variable declarations are _not_ expressions, so the
 value of `5 * 5 - 5` is returned.
 
@@ -119,11 +120,11 @@ value of `5 * 5 - 5` is returned.
 > `5 * 5 - 5`, when evaluated). Functions, which we will discuss in an upcoming
 > lesson, also contain all of their code inside curly braces, but for functions,
 > we need to _explicitly_ use the word `return` to tell JavaScript what we want
-> the output to be (if we want one, at all). Just remember that the _implicit
-> return is something unique to block statements_ like the ones we use for
-> `if...else` and loop statements.
+> the return value to be (if we want one at all). Just remember that the
+> _implicit return is something unique to block statements_ like the ones we use
+> for `if...else` and loop statements.
 
-## Describe the Difference Between Truthy and Falsy Values
+## Review the Difference Between Truthy and Falsy Values
 
 Truthiness and falsiness indicate what happens when the value is converted into
 a boolean. If, upon conversion, the value becomes `true`, we say that it's a
@@ -136,9 +137,9 @@ In JavaScript, the following values are **falsy**:
 - `undefined`
 - `0`
 - `NaN`
-- An empty string (` `` `, `''`, `""`)
+- An empty string (`''`, `""`)
 
-**_Every other value is truthy_**.
+**Every other value is truthy**.
 
 To check whether a value is truthy or falsy in our browser's JS console, we can
 pass it to the global `Boolean` object, which converts the value into its
@@ -180,15 +181,13 @@ Boolean({ firstName: 'Brendan', lastName: 'Eich' });
 > ever, really — it's an imperfect solution for legacy code compatibility.)
 > Ready to put that killer new vocabulary to the test? Here we go!
 
-## Learn to Use Conditional Statements
+## Review How to Use Conditional Statements
 
-In JavaScript, we use three structures for implementing condition-based control
-flow: the `if...else` statement, `switch` statement, and ternary operator.
+JavaScript includes three structures for implementing code conditionally: *if statements*, *switch statements*, and *ternary expressions*.
 
 ### `if` statement
 
-`if` statements are the most common type of conditional, and they're pretty
-straightforward:
+To write a basic `if` statement, we use the following structure:
 
 ```js
 if (condition) {
@@ -196,7 +195,11 @@ if (condition) {
 }
 ```
 
-If the condition returns a **truthy** value, run the code inside the **block**:
+It consists of the `if` keyword followed by the condition to be checked in
+parentheses.  After that comes a _block statement_ (more commonly called a _code
+block_): one or more JavaScript expressions or statements enclosed in `{}`. The
+_code block_ contains the code we want to execute _if_ the condition returns a
+truthy value:
 
 ```js
 const age = 30;
@@ -229,8 +232,9 @@ isAdult;
 
 #### `else`
 
-If we want to run some code when the condition returns a `falsy` value, we can
-use an `else` clause:
+Often we want to run one block of code when the condition returns a `truthy`
+value and a _different_ block of code when it returns a `falsey` value. To do
+this, we use an `else` clause:
 
 ```js
 const age = 14;
@@ -248,52 +252,116 @@ isAdult;
 // => false
 ```
 
-#### Nested Conditionals
+Note that the `else` clause **does not take a condition** — if the condition for
+the `if` returns a falsey value, we want the `else` code block to run **no
+matter what**. This means that exactly one of the code blocks will _always_ run.
 
-If we have multiple overlapping conditions, we can employ nested conditional
-statements. For example, instead of just deciding whether the passed-in `age`
-meets the criteria for `isAdult`, let's add in some other hallmarks of
-burgeoning adulthood (in American society, at least): `canWork`, `canEnlist`,
-and `canDrink`. 16-year-olds can legally work; 18-year-olds can work, enlist,
-and are legal adults; and 21-year-olds can work, enlist, are legal adults, and
-can drink (at the federally set minimum age, although there can be
-state-to-state exceptions for these laws). Let's use these conditions in a
-nesting example:
+#### Ternary operator
+
+Recall that this is the exact situation where we can use the ternary operator.
+Here's what the code above would look like using a ternary:
+
+```js
+const age = 26;
+
+let isAdult;
+
+age >= 18 ? (isAdult = true) : (isAdult = false);
+// => true
+
+isAdult;
+// => true
+```
+
+Here, we assign `isAdult` as `true` if the condition returns a truthy value and
+as `false` otherwise, exactly like the version using `if`.
+
+Remember that a ternary is an _expression_ — it returns a _value_. What
+this means is that we can simplify the code above a bit and assign the _result_ of
+the ternary directly to a variable:
+
+```js
+const age = 26;
+const isAdult = age >= 18 ? true : false;
+
+isAdult;
+// => true
+```
+
+**Advanced:** What is the ternary above doing? Basically, it's saying: "when the
+conditional code returns `true`, return `true`, and when the conditional code
+returns `false`, return `false`." Sounds a bit redundant, doesn't it? When the
+return values are `true` and `false` as in the example above, you actually don't
+need to use a ternary — or an `if...else` — at all! This is because
+***the conditional is an expression as well***. The return value of `age >= 18`
+is a _Boolean value_ (`true` or `false`), so it can be assigned directly to our
+`isAdult` variable:
+
+```js
+const age = 6;
+const isAdult = age >= 18;
+
+isAdult;
+//=> false
+```
+
+The ternary (or `if...else`) is only necessary if the desired return value is
+something other than a Boolean:
+
+```js
+const age = 20;
+const ageMessage = age >= 18 ? "Congratulations! You're an adult!" : "Enjoy your childhood while it lasts!";
+
+ageMessage;
+//=> "Congratulations! You're an adult!"
+```
+
+If it helps you visualize what's going on, you can wrap the condition, the
+expressions, or the entire ternary in parentheses:
 
 ```js
 const age = 17;
 
-let isAdult, canWork, canEnlist, canDrink;
+const isAdult = (age >= 18) ? true : false;
 
-if (age >= 16) {
-    canWork = true;
+const canWork = (age >= 16) ? (1 === 1) : (1 !== 1);
 
-    if (age >= 18) {
-        isAdult = true;
-        canEnlist = true;
-
-        if (age >= 21) {
-            canDrink = true;
-        }
-    }
-}
+const canEnlist = (isAdult ? true : false);
 
 isAdult;
-// => undefined
+// => false
 
 canWork;
 // => true
 
 canEnlist;
-// => undefined
-
-canDrink;
-// => undefined
+// => false
 ```
+
+> **Top Tip:** Be careful to not overuse the ternary operator. It's fine for
+> slimming down a simple `if...else`, but be conscious of how easy your code is
+> to understand for an outsider. Remember, you generally write code once, but it
+> gets read (by yourself and others) **far** more than once. The ternary is
+> often more difficult to quickly interpret than a regular old `if...else`, so
+> make sure the reduction in code is worth any potential reduction in
+> readability.
 
 #### `else if`
 
-Another way to represent multiple possible conditions is with `else if` clauses:
+We've discussed the case where our condition is _binary_ (one code block
+executes if the conditional returns true and a second executes otherwise), but
+sometimes we need to check multiple conditions. We can handle this situation by
+using one or more `else if` clauses.
+
+Let's say that instead of just deciding whether the passed-in `age` meets the
+criterion for `isAdult`, we want to add in some other examples of adulthood (in
+American society, at least): `canWork`, `canEnlist`, and `canDrink`.
+16-year-olds can legally work; 18-year-olds can do what 16-year-olds can do
+**plus** they can enlist and they are legal adults; 21-year-olds can do what 16-
+and 18-year-olds can do **plus** they can drink (at the federally set minimum
+age).
+
+Here's how we can handle that using `else if` clauses:
 
 ```js
 const age = 20;
@@ -327,16 +395,56 @@ canDrink;
 // => undefined
 ```
 
-As soon as one of the conditions returns a truthy value, the attached code block
-runs and the conditional exits. If none of the conditions evaluate to a truthy
-value, then the `else` code block runs (or, in the absence of an `else` clause,
-the conditional simply exits). Note that, unlike the nested `if` statements
-above, **at most one code block will run**. In the absence of an `else`
-statement, it's possible that none of the `if` conditions return a truthy value
-and **no block is run**. However, it's impossible for more than one block in a
-linked `if...else if...else` control flow to run.
+Any time you use an `if...else if` construction, **at most one code block will
+be executed**. As soon as one of the conditions returns a truthy value, the
+attached code block runs and the conditional statement ends. In the example
+above, we have not included an `else` statement so, if none of the conditions is
+truthy, no code blocks will be run. If we had included an `else` clause, exactly
+one code block would be run.
 
-## `switch`
+#### Nested `if` Statements
+
+You may have noticed that there is some redundancy in the example above: three
+of the four variables appear in more than one of the conditions. In this
+circumstance, we can streamline our code a bit by using nested conditional
+statements:
+
+```js
+const age = 17;
+
+let isAdult, canWork, canEnlist, canDrink;
+
+if (age >= 16) {
+  canWork = true;
+
+  if (age >= 18) {
+    isAdult = true;
+    canEnlist = true;
+
+    if (age >= 21) {
+      canDrink = true;
+    }
+  }
+}
+
+canWork;
+```
+
+The first `if` condition checks for the "base level" of adulthood (`age >= 16`),
+and each subsequent nested `if` "adds on." Note that each inner `if` statement
+is nested **inside** the code block of the one before. This means that the inner
+`if` statements will only execute if the outer ones are truthy. This makes
+sense: if age is less than 16, we're done &mdash; there's no need to check the
+remaining conditions because we know they have to be false as well. Otherwise
+JavaScript will keep checking each subsequent condition until it either comes to
+one that is false or finishes running all the code blocks.
+
+While nested `if`s are more efficient than `if...else if`s for handling
+overlapping categories, they are also more difficult to read. An `if...else if`
+construction will always work. You should consider the tradeoff of readability
+vs. efficiency in deciding which construction to use.
+
+### `switch`
 
 Running multiple blocks in the same control flow is one of the many talents of
 the `switch` statement. The general structure is as follows:
@@ -584,73 +692,6 @@ The `'happy'` case matches and assigns the string `'Heck yea; be happy!'` to
 `response`. However, since we didn't `break` after that assignment, the
 `default` case _also_ runs and reassigns `"Sorry, I don't know how to respond to
 that mood."` to `response`. Whoops!
-
-### Ternary operator
-
-The ternary operator, the final piece of the conditional puzzle, is a good way
-to represent an `if...else` statement in a single line of code:
-
-```js
-condition ? expression1 : expression2;
-```
-
-If the condition returns a truthy value, run the code in `expression1`. If the
-condition returns a falsy value, run the code in `expression2`.
-
-```js
-const age = 45;
-
-let isAdult;
-
-age >= 18 ? (isAdult = true) : (isAdult = false);
-// => true
-
-isAdult;
-// => true
-```
-
-In the above example, we assign `isAdult` as `true` if the condition returns a
-truthy value and as `false` otherwise. We can simplify that a bit and assign the
-result of the ternary directly to a variable:
-
-```js
-const age = 60;
-
-const isAdult = age >= 18 ? true : false;
-
-isAdult;
-// => true
-```
-
-If it helps you visualize what's going on, you can wrap the condition, the
-expressions, or the entire ternary in parentheses:
-
-```js
-const age = 17;
-
-const isAdult = (age >= 18) ? true : false;
-
-const canWork = (age >= 16) ? (1 === 1) : (1 !== 1);
-
-const canEnlist = (isAdult ? true : false);
-
-isAdult;
-// => false
-
-canWork;
-// => true
-
-canEnlist;
-// => false
-```
-
-> **Top Tip:** Be careful to not overuse the ternary operator. It's fine for
-> slimming down a simple `if...else`, but be conscious of how easy your code is
-> to understand for an outsider. Remember, you generally write code once, but it
-> gets read (by yourself and others) **far** more than once. The ternary is
-> often more difficult to quickly interpret than a regular old `if...else`, so
-> make sure the reduction in code is worth any potential reduction in
-> readability.
 
 ### Code Examples
 
