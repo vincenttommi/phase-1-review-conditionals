@@ -1,6 +1,13 @@
 # JavaScript Conditionals
 
-## Problem Statement
+## Learning Goals
+
+- Review what constitutes an expression in JavaScript
+- Organize code using block statements
+- Review the difference between truthy and falsy values
+- Review how to use conditional statements
+
+## Introduction
 
 If you're hungry, you make a sandwich. If the traffic light is green, you press
 the gas pedal. If your rent is due, then you pay your rent. This breaks down
@@ -19,13 +26,6 @@ _if_ a certain condition is met. In the programming world, this is called
 
 Before we dive into JavaScript's conditional structures, let's go over a few
 concepts that provide the syntactic underpinnings.
-
-## Objectives
-
-1.  Explain what constitutes an expression in JavaScript
-2.  Organize code using block statements
-3.  Describe the difference between truthy and falsy values
-4.  Learn to use conditional statements
 
 ## Explain What Constitutes an Expression in JavaScript
 
