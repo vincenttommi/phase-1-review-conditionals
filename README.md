@@ -1,4 +1,4 @@
-# JavaScript Conditionals
+# Review: Conditionals
 
 ## Learning Goals
 
@@ -256,10 +256,10 @@ Note that the `else` clause **does not take a condition** — if the condition f
 the `if` returns a falsey value, we want the `else` code block to run **no
 matter what**. This means that exactly one of the code blocks will _always_ run.
 
-#### Ternary operator
+#### Ternary Expressions
 
-Recall that this is the exact situation where we can use the ternary operator.
-Here's what the code above would look like using a ternary:
+Recall that this is the exact situation where we can use a ternary expression.
+Here's what the code above would look like using the ternary operator:
 
 ```js
 const age = 26;
@@ -446,52 +446,29 @@ vs. efficiency in deciding which construction to use.
 
 ### `switch`
 
-Running multiple blocks in the same control flow is one of the many talents of
-the `switch` statement. The general structure is as follows:
+Let's say we have a program that includes a variable containing a person's food
+order and we want to create a variable containing the appropriate ingredients.
+Using an `if...else if` construction, that might look like this:
 
 ```js
-switch (expression) {
-    case value1:
-        // Statements
-        break;
-    case value2:
-        // Statements
-        break;
-    default:
-        // Statements
-        break;
+const order = 'cheeseburger';
+
+let ingredients;
+if (order === 'cheeseburger') {
+    ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
+} else if (order === 'hamburger') {
+    ingredients = 'bun, burger, lettuce, tomato, onion';
+} else if (order === 'malted') {
+    ingredients = 'milk, ice cream, malted milk powder';
+} else {
+    console.log("Sorry, that's not on the menu right now.");
 }
 ```
 
-The JavaScript engine evaluates the expression and then compares the returned
-value against each of the `case` values _using strict equality_ (`===`):
-
-```js
-const hunger = 'famished';
-
-let food;
-
-switch (hunger) {
-    case 'light':
-        food = 'grapes';
-        break;
-    case 'moderate':
-        food = 'sushi';
-        break;
-    case 'famished':
-        food = 'lasagna';
-        break;
-}
-// => "lasagna"
-
-food;
-// => "lasagna"
-```
-
-Generally, we use a `switch` statement if we need a conditional that hinges on a
-single value but requires a separate handler for each potential case. For
-example, the `switch` statement here doesn't require us to repeat the `if (order
-=== _____)` line for each possibility:
+As we can see, there's quite a bit of repetition here: we always test `order` and
+we always compare with `===`. This is a pretty common selection need. It's so
+standard that the `switch` statement was created to enable us to streamline our
+code. Here's the `switch` version of the code above:
 
 ```js
 const order = 'cheeseburger';
@@ -517,20 +494,11 @@ switch (order) {
 If we'd like to write out the same code with an `if` conditional, it will look
 like this:
 
-```js
-const order = 'cheeseburger';
-
-let ingredients;
-if (order === 'cheeseburger') {
-    ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
-} else if (order === 'hamburger') {
-    ingredients = 'bun, burger, lettuce, tomato, onion';
-} else if (order === 'malted') {
-    ingredients = 'milk, ice cream, malted milk powder';
-} else {
-    console.log("Sorry, that's not on the menu right now.");
-}
-```
+The JavaScript engine compares the value passed in to the `switch` statement
+(here, `order`) against each of the `case` values _using strict equality_
+(`===`). When a match is found, the statements nested under that `case` are
+executed. In this example, by using the `switch` statement, we avoid the need to
+repeat the `if (order === _____)` line for each possibility.
 
 We can also assign the same set of statements to multiple cases. In the
 following example, if the `age` variable contains any number between `13` and
@@ -562,46 +530,36 @@ The `default` and `break` keywords are both optional in basic `switch`
 statements, but useful. In more complicated statements, they become necessary to
 ensure the correct flow.
 
+#### `default`
+
+The `default` keyword is similar to the `else` clause in an `if...else`
+construction. It specifies a set of statements to run after all of the `switch`
+statement's `case`s have been checked. However, it is different from an `else`
+in that **the only time it does _not_ run is if the engine hits a `break` in one
+of the `case` statements**. If you only want one code block in your `switch`
+statement to execute, you should always include the `break` keyword.
+
 #### `break`
 
 In the previous example, `break` is used to stop the `switch` statement from
-continuing to look at case statements. If instead, we wrote the following:
+continuing to look at case statements once it finds a match. If we left out the
+`break` keyword, the switch statement would get to a match at `case 15` and
+continue on through to `case 19`, setting `isTeenager` to true. However, since
+we didn't break after that assignment, the code would continue to execute and
+`isTeenager` would wind up being reset to false. To keep that from happening, we
+use `break` to tell the JavaScript engine to stop executing the `switch`
+statement as soon as it finds a match. You will often see switch statements
+where `break` is used in every case as a way to ensure there is no unexpected
+behavior from multiple cases executing.
+
+**Advanced:** Sometimes we _want_ to potentially match multiple cases, and we
+will need to leave out `break` in order to do this. We can refactor the `if...else
+if...else` example we saw earlier as a more compact, less repetitious `switch`
+statement. To make it work, we will employ a neat little trick: we'll use
+comparisons for our `case` statements instead of a simple value.
 
 ```js
-const age = 15;
-
-let isTeenager;
-
-switch (age) {
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-        isTeenager = true;
-        console.log('case 19: ', isTeenager);
-    default:
-        isTeenager = false;
-        console.log('default: ', isTeenager);
-}
-```
-
-The switch statement would get to a match at `case 15` and continue on through
-to `case 19`, setting `isTeenager` to true. It would then get to `default` and
-set `isTeenager` to false. You will often see switch statements where `break` is
-used in every case as a way to ensure there is no unexpected behavior from
-multiple cases executing.
-
-However, sometimes we do want to potentially match multiple cases, and we will
-need to leave out `break` in order to do this. There's a neat little trick we
-can employ that allows us to use comparisons for `case` statements. Let's
-rewrite the above `if...else` chain as a more compact, less repetitious `switch`
-statement:
-
-```js
-const age = 20;
+const age = 25;
 
 let isAdult, canWork, canEnlist, canDrink;
 
@@ -626,178 +584,31 @@ canEnlist;
 // => true
 
 canDrink;
-// => undefined
+// => true
 ```
 
 We specified `true` as the value to `switch` on. All of our `case`s are
-comparisons, and if the comparison returns `true` its statements will be run.
-Because we did not include any `break` statements, once _one_ case statement
-matches, all subsequent statements will execute.
+_comparison expressions_ that return `true` or `false`. Therefore, if a
+comparison returns `true`, its statements will be run. Because we did not include
+any `break` statements, once _one_ case statement matches, all subsequent
+statements will execute. This is what we want here: if `age` is greater than 21,
+it's also greater than 18 and 16, so we want *all* the assignments to be made.
 
-With `age` set to `20` in the above example, the first `case`, `age >= 21`,
-returns `false` and so the assignment of `canDrink` never happens. The engine
-then proceeds to the next `case`, `age >= 18`, which returns `true`, assigning
-the value `true` to `isAdult` and `canEnlist`. Since it encounters no `break`
-statement, `canWork` is then set to true in the last case statement.
-
-#### `default`
-
-The `default` keyword specifies a set of statements to run after all of the
-`switch` statement's `case`s have been checked. The only time the `default`
-statements do _not_ run is if the engine hits a `break` in one of the `case`
-statements.
-
-```js
-const mood = 'quizzical';
-
-let response;
-
-switch (mood) {
-    case 'happy':
-        response = 'Heck yea; be happy!';
-    case 'sad':
-        response = "You're awesome; keep your head up!";
-    default:
-        response = "Sorry, I don't know how to respond to that mood.";
-}
-// => "Sorry, I don't know how to respond to that mood."
-
-response;
-// => "Sorry, I don't know how to respond to that mood."
-```
-
-It's typically safer to include `break` statements because it helps avoid bugs
-like this:
-
-```js
-const mood = 'happy';
-
-let response;
-
-switch (mood) {
-    case 'happy':
-        response = 'Heck yea; be happy!';
-    case 'sad':
-        response = "You're awesome; keep your head up!";
-    default:
-        response = "Sorry, I don't know how to respond to that mood.";
-}
-// => "Sorry, I don't know how to respond to that mood."
-
-response;
-// => "Sorry, I don't know how to respond to that mood."
-```
-
-The `'happy'` case matches and assigns the string `'Heck yea; be happy!'` to
-`response`. However, since we didn't `break` after that assignment, the
-`default` case _also_ runs and reassigns `"Sorry, I don't know how to respond to
-that mood."` to `response`. Whoops!
-
-### Code Examples
-
-There are tons of control flow structures in the Flatbook project code base, a
-project that emulates the basic functionality of Facebook.
-
-#### `if...else`
-
-When a guest tries to log in, check whether the provided email and password
-match an active account:
-
-```js
-let errorMessage = '';
-let loggedIn = false;
-
-// *User enters a valid email and password and clicks the Login button*
-const email = 'avi@flatbook.com';
-const password = 'j4v45cr1pt 15 4w350m3';
-
-// *The Flatbook app then checks whether the provided email and password are valid*
-const accountFound = true;
-const passwordMatches = false;
-
-if (email === '') {
-    errorMessage = 'Please provide an email.';
-} else if (password === '') {
-    errorMessage = 'Please provide a password.';
-} else {
-    if (accountFound) {
-        if (passwordMatches) {
-            loggedIn = true;
-        } else {
-            errorMessage = "Sorry, that password doesn't match our records.";
-        }
-    } else {
-        errorMessage =
-            'Sorry, no account matching the provided email address was found.';
-    }
-}
-// => "Sorry, that password doesn't match our records."
-
-loggedIn;
-// => false
-
-errorMessage;
-// => "Sorry, that password doesn't match our records."
-```
-
-### Ternary operator
-
-When a user logs in, check whether it's their birthday. If it is, set a
-celebratory message to appear in a banner; _else_, set the message to an empty
-string:
-
-```js
-const userBirthday = 'Dec 10';
-
-const userFullName = 'Ada Lovelace';
-
-let todaysDate = 'Dec 10';
-
-const birthdayMessage =
-    todaysDate === userBirthday ? `Happy birthday, ${userFullName}!` : '';
-
-birthdayMessage;
-// => "Happy birthday, Ada Lovelace!"
-```
-
-### `switch`
-
-Once the user logs in, set their permissions based on the account type:
-
-```js
-const accountType = 'admin';
-
-let permissionsLevel;
-let canViewProfiles = false;
-let canImpersonateUsers = false;
-
-switch (accountType) {
-    case 'guest':
-        permissionsLevel = 0;
-        break;
-    case 'user':
-        permissionsLevel = 10;
-        canViewProfiles = true;
-        break;
-    case 'admin':
-        permissionsLevel = 20;
-        canViewProfiles = true;
-        canImpersonateUsers = true;
-        break;
-}
-// => true
-
-permissionsLevel;
-// => 20
-```
+If we set `age` to `20` in the above example, the first `case`, `age >= 21`,
+returns `false` and the assignment of `canDrink` never happens. The engine then
+proceeds to the next `case`, `age >= 18`, which returns `true`, assigning the
+value `true` to `isAdult` and `canEnlist`. Since it encounters no `break`
+statement, it then proceeds to the last case statement where `canWork` is set to
+true as well.
 
 ## Conclusion
 
-It's easy to imagine hundreds of other conditionals that go into the functioning
-of a large site like Flatbook. Conditional statements make the internet go
-round, so study up! The more comfortable you are with controlling the flow of
-your code with conditional statements, the more complex websites you will be
-able to build.
+You now have three different types of conditional statements available to you:
+the `if` statement, the `ternary` expression, and the `switch` statement. The
+`if` statement is the one you will use most often — in fact, you can _always_
+construct your conditional code using some combination of `if`, `else if`, and
+`else`. It may not be the most efficient way to write the code, but it will
+always do the trick.
 
 ## Resources
 
