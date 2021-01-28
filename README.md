@@ -622,14 +622,14 @@ isAdult;
 ```
 
 If it helps you visualize what's going on, you can wrap the condition, the
-expressions, or the entire ternary in parentheses:
+expressions, or both in parentheses:
 
 ```js
 const age = 17;
 
-const isAdult = age >= 18 ? true : false;
+const isAdult = (age >= 18) ? true : false;
 
-const canWork = age >= 16 ? 1 === 1 : 1 !== 1;
+const canWork = (age >= 16) ? (1 === 1) : (1 !== 1);
 
 const canEnlist = isAdult ? true : false;
 
