@@ -6,12 +6,12 @@ If you're hungry, you make a sandwich. If the traffic light is green, you press
 the gas pedal. If your rent is due, then you pay your rent. This breaks down
 into a lot of conditional choices:
 
-- `if` hungry :arrow_right: make sandwich.
-  - `else` :arrow_right: don't make sandwich.
-- `if` light is green :arrow_right: press gas pedal.
-  - `else` :arrow_right: press brake pedal.
-- `if` it's the first of the month :arrow_right: pay rent.
-  - `else` :arrow_right: don't pay rent.
+- `if` hungry → make sandwich.
+  - `else` → don't make sandwich.
+- `if` light is green → press gas pedal.
+  - `else` → press brake pedal.
+- `if` it's the first of the month → pay rent.
+  - `else` → don't pay rent.
 
 Writing code involves the same type of logic — we only want an action to happen
 _if_ a certain condition is met. In the programming world, this is called
