@@ -491,9 +491,6 @@ switch (order) {
 }
 ```
 
-If we'd like to write out the same code with an `if` conditional, it will look
-like this:
-
 The JavaScript engine compares the value passed in to the `switch` statement
 (here, `order`) against each of the `case` values _using strict equality_
 (`===`). When a match is found, the statements nested under that `case` are
@@ -609,6 +606,10 @@ the `if` statement, the `ternary` expression, and the `switch` statement. The
 construct your conditional code using some combination of `if`, `else if`, and
 `else`. It may not be the most efficient way to write the code, but it will
 always do the trick.
+
+As a rule of thumb, you may find it makes sense to start with `if` statements
+and, once you've got the code working, consider refactoring it to use a ternary
+or switch statement if they're better suited for what you need to do.
 
 ## Resources
 
