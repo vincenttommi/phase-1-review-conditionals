@@ -92,22 +92,21 @@ fullName;
 ## Organize Code Using Block Statements
 
 A block statement is a pair of curly braces (`{ }`) used to group JavaScript
-statements. It plays a role in conditional statements, loops, and
-functions.
+statements. It plays a role in conditional statements, loops, and functions.
 
 ```js
 {
-	('This line is a JavaScript statement nested inside a block statement!');
+    ('This line is a JavaScript statement nested inside a block statement!');
 
-	// This is also a statement nested inside a block:
-	5 * 5 - 5;
+    // This is also a statement nested inside a block:
+    5 * 5 - 5;
 
-	// And so are these:
-	const weCan = 'group multiple statements';
+    // And so are these:
+    const weCan = 'group multiple statements';
 
-	const suchAs = 'these variable declarations';
+    const suchAs = 'these variable declarations';
 
-	const insideA = 'block statement.';
+    const insideA = 'block statement.';
 }
 // => 20
 ```
@@ -116,13 +115,13 @@ Block statements return the value of the last evaluated expression inside the
 curly braces. Remember, the variable declarations are _not_ expressions, so the
 value of `5 * 5 - 5` is returned.
 
-**Note**: The statement above _implicitly_ returns 20 (the value returned by
-`5 * 5 - 5`, when evaluated). Functions, which we will discuss in an upcoming
-lesson, also contain all of their code inside curly braces, but for functions,
-we need to _explicitly_ use the word `return` to tell JavaScript what we want
-the output to be (if we want one, at all). Just remember that the _implicit
-return is something unique to block statements_ like the ones we use for
-`if...else` and loop statements.
+> **Note**: The statement above _implicitly_ returns 20 (the value returned by
+> `5 * 5 - 5`, when evaluated). Functions, which we will discuss in an upcoming
+> lesson, also contain all of their code inside curly braces, but for functions,
+> we need to _explicitly_ use the word `return` to tell JavaScript what we want
+> the output to be (if we want one, at all). Just remember that the _implicit
+> return is something unique to block statements_ like the ones we use for
+> `if...else` and loop statements.
 
 ## Describe the Difference Between Truthy and Falsy Values
 
@@ -177,9 +176,9 @@ Boolean({ firstName: 'Brendan', lastName: 'Eich' });
 // => true
 ```
 
-**NOTE**: `document.all` is also falsy, but don't worry about it for now. (Or
-ever, really — it's an imperfect solution for legacy code compatibility.)
-Ready to put that killer new vocabulary to the test? Here we go!
+> **NOTE**: `document.all` is also falsy, but don't worry about it for now. (Or
+> ever, really — it's an imperfect solution for legacy code compatibility.)
+> Ready to put that killer new vocabulary to the test? Here we go!
 
 ## Learn to Use Conditional Statements
 
@@ -193,7 +192,7 @@ straightforward:
 
 ```js
 if (condition) {
-	// Block of code
+    // Block of code
 }
 ```
 
@@ -205,7 +204,7 @@ const age = 30;
 let isAdult;
 
 if (age >= 18) {
-	isAdult = true;
+    isAdult = true;
 }
 // => true
 
@@ -221,7 +220,7 @@ const age = 14;
 let isAdult;
 
 if (age >= 18) {
-	isAdult = true;
+    isAdult = true;
 }
 
 isAdult;
@@ -239,9 +238,9 @@ const age = 14;
 let isAdult;
 
 if (age >= 18) {
-	isAdult = true;
+    isAdult = true;
 } else {
-	isAdult = false;
+    isAdult = false;
 }
 // => false
 
@@ -255,10 +254,11 @@ If we have multiple overlapping conditions, we can employ nested conditional
 statements. For example, instead of just deciding whether the passed-in `age`
 meets the criteria for `isAdult`, let's add in some other hallmarks of
 burgeoning adulthood (in American society, at least): `canWork`, `canEnlist`,
-and `canDrink`. 16-year-olds can legally work; 18-year-olds can work, enlist, and are
-legal adults; and 21-year-olds can work, enlist, are legal adults, and can
-drink (at the federally set minimum age, although there can be state-to-state exceptions
-for these laws). Let's use these conditions in a nesting example:
+and `canDrink`. 16-year-olds can legally work; 18-year-olds can work, enlist,
+and are legal adults; and 21-year-olds can work, enlist, are legal adults, and
+can drink (at the federally set minimum age, although there can be
+state-to-state exceptions for these laws). Let's use these conditions in a
+nesting example:
 
 ```js
 const age = 17;
@@ -266,16 +266,16 @@ const age = 17;
 let isAdult, canWork, canEnlist, canDrink;
 
 if (age >= 16) {
-	canWork = true;
+    canWork = true;
 
-	if (age >= 18) {
-		isAdult = true;
-		canEnlist = true;
+    if (age >= 18) {
+        isAdult = true;
+        canEnlist = true;
 
-		if (age >= 21) {
-			canDrink = true;
-		}
-	}
+        if (age >= 21) {
+            canDrink = true;
+        }
+    }
 }
 
 isAdult;
@@ -301,16 +301,16 @@ const age = 20;
 let isAdult, canWork, canEnlist, canDrink;
 
 if (age >= 21) {
-	isAdult = true;
-	canWork = true;
-	canEnlist = true;
-	canDrink = true;
+    isAdult = true;
+    canWork = true;
+    canEnlist = true;
+    canDrink = true;
 } else if (age >= 18) {
-	isAdult = true;
-	canWork = true;
-	canEnlist = true;
+    isAdult = true;
+    canWork = true;
+    canEnlist = true;
 } else if (age >= 16) {
-	canWork = true;
+    canWork = true;
 }
 // => true
 
@@ -327,14 +327,14 @@ canDrink;
 // => undefined
 ```
 
-As soon as one of the conditions returns a truthy value, the attached code
-block runs and the conditional exits. If none of the conditions evaluate to a
-truthy value, then the `else` code block runs (or, in the absence of an `else`
-clause, the conditional simply exits). Note that, unlike the nested `if`
-statements above, **at most one code block will run**. In the absence of an
-`else` statement, it's possible that none of the `if` conditions return a
-truthy value and **no block is run**. However, it's impossible for more than
-one block in a linked `if...else if...else` control flow to run.
+As soon as one of the conditions returns a truthy value, the attached code block
+runs and the conditional exits. If none of the conditions evaluate to a truthy
+value, then the `else` code block runs (or, in the absence of an `else` clause,
+the conditional simply exits). Note that, unlike the nested `if` statements
+above, **at most one code block will run**. In the absence of an `else`
+statement, it's possible that none of the `if` conditions return a truthy value
+and **no block is run**. However, it's impossible for more than one block in a
+linked `if...else if...else` control flow to run.
 
 ## `switch`
 
@@ -343,15 +343,15 @@ the `switch` statement. The general structure is as follows:
 
 ```js
 switch (expression) {
-	case value1:
-		// Statements
-		break;
-	case value2:
-		// Statements
-		break;
-	default:
-		// Statements
-		break;
+    case value1:
+        // Statements
+        break;
+    case value2:
+        // Statements
+        break;
+    default:
+        // Statements
+        break;
 }
 ```
 
@@ -364,15 +364,15 @@ const hunger = 'famished';
 let food;
 
 switch (hunger) {
-	case 'light':
-		food = 'grapes';
-		break;
-	case 'moderate':
-		food = 'sushi';
-		break;
-	case 'famished':
-		food = 'lasagna';
-		break;
+    case 'light':
+        food = 'grapes';
+        break;
+    case 'moderate':
+        food = 'sushi';
+        break;
+    case 'famished':
+        food = 'lasagna';
+        break;
 }
 // => "lasagna"
 
@@ -380,10 +380,10 @@ food;
 // => "lasagna"
 ```
 
-Generally, we use a `switch` statement if we need a conditional that hinges on
-a single value but requires a separate handler for each potential case. For
-example, the `switch` statement here doesn't require us to repeat the
-`if (order === _____)` line for each possibility:
+Generally, we use a `switch` statement if we need a conditional that hinges on a
+single value but requires a separate handler for each potential case. For
+example, the `switch` statement here doesn't require us to repeat the `if (order
+=== _____)` line for each possibility:
 
 ```js
 const order = 'cheeseburger';
@@ -391,18 +391,18 @@ const order = 'cheeseburger';
 let ingredients;
 
 switch (order) {
-	case 'cheeseburger':
-		ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
-		break;
-	case 'hamburger':
-		ingredients = 'bun, burger, lettuce, tomato, onion';
-		break;
-	case 'malted':
-		ingredients = 'milk, ice cream, malted milk powder';
-		break;
-	default:
-		console.log("Sorry, that's not on the menu right now.");
-		break;
+    case 'cheeseburger':
+        ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
+        break;
+    case 'hamburger':
+        ingredients = 'bun, burger, lettuce, tomato, onion';
+        break;
+    case 'malted':
+        ingredients = 'milk, ice cream, malted milk powder';
+        break;
+    default:
+        console.log("Sorry, that's not on the menu right now.");
+        break;
 }
 ```
 
@@ -414,13 +414,13 @@ const order = 'cheeseburger';
 
 let ingredients;
 if (order === 'cheeseburger') {
-	ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
+    ingredients = 'bun, burger, cheese, lettuce, tomato, onion';
 } else if (order === 'hamburger') {
-	ingredients = 'bun, burger, lettuce, tomato, onion';
+    ingredients = 'bun, burger, lettuce, tomato, onion';
 } else if (order === 'malted') {
-	ingredients = 'milk, ice cream, malted milk powder';
+    ingredients = 'milk, ice cream, malted milk powder';
 } else {
-	console.log("Sorry, that's not on the menu right now.");
+    console.log("Sorry, that's not on the menu right now.");
 }
 ```
 
@@ -436,23 +436,23 @@ const age = 15;
 let isTeenager;
 
 switch (age) {
-	case 13:
-	case 14:
-	case 15:
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-		isTeenager = true;
-		break;
-	default:
-		isTeenager = false;
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+        isTeenager = true;
+        break;
+    default:
+        isTeenager = false;
 }
 ```
 
 The `default` and `break` keywords are both optional in basic `switch`
-statements, but useful. In more complicated statements, they become necessary
-to ensure the correct flow.
+statements, but useful. In more complicated statements, they become necessary to
+ensure the correct flow.
 
 #### `break`
 
@@ -465,18 +465,18 @@ const age = 15;
 let isTeenager;
 
 switch (age) {
-	case 13:
-	case 14:
-	case 15:
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-		isTeenager = true;
-		console.log('case 19: ', isTeenager);
-	default:
-		isTeenager = false;
-		console.log('default: ', isTeenager);
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+        isTeenager = true;
+        console.log('case 19: ', isTeenager);
+    default:
+        isTeenager = false;
+        console.log('default: ', isTeenager);
 }
 ```
 
@@ -498,13 +498,13 @@ const age = 20;
 let isAdult, canWork, canEnlist, canDrink;
 
 switch (true) {
-	case age >= 21:
-		canDrink = true;
-	case age >= 18:
-		isAdult = true;
-		canEnlist = true;
-	case age >= 16:
-		canWork = true;
+    case age >= 21:
+        canDrink = true;
+    case age >= 18:
+        isAdult = true;
+        canEnlist = true;
+    case age >= 16:
+        canWork = true;
 }
 // => true
 
@@ -545,12 +545,12 @@ const mood = 'quizzical';
 let response;
 
 switch (mood) {
-	case 'happy':
-		response = 'Heck yea; be happy!';
-	case 'sad':
-		response = "You're awesome; keep your head up!";
-	default:
-		response = "Sorry, I don't know how to respond to that mood.";
+    case 'happy':
+        response = 'Heck yea; be happy!';
+    case 'sad':
+        response = "You're awesome; keep your head up!";
+    default:
+        response = "Sorry, I don't know how to respond to that mood.";
 }
 // => "Sorry, I don't know how to respond to that mood."
 
@@ -567,12 +567,12 @@ const mood = 'happy';
 let response;
 
 switch (mood) {
-	case 'happy':
-		response = 'Heck yea; be happy!';
-	case 'sad':
-		response = "You're awesome; keep your head up!";
-	default:
-		response = "Sorry, I don't know how to respond to that mood.";
+    case 'happy':
+        response = 'Heck yea; be happy!';
+    case 'sad':
+        response = "You're awesome; keep your head up!";
+    default:
+        response = "Sorry, I don't know how to respond to that mood.";
 }
 // => "Sorry, I don't know how to respond to that mood."
 
@@ -582,7 +582,8 @@ response;
 
 The `'happy'` case matches and assigns the string `'Heck yea; be happy!'` to
 `response`. However, since we didn't `break` after that assignment, the
-`default` case _also_ runs and reassigns `"Sorry, I don't know how to respond to that mood."` to `response`. Whoops!
+`default` case _also_ runs and reassigns `"Sorry, I don't know how to respond to
+that mood."` to `response`. Whoops!
 
 ### Ternary operator
 
@@ -609,8 +610,8 @@ isAdult;
 ```
 
 In the above example, we assign `isAdult` as `true` if the condition returns a
-truthy value and as `false` otherwise. We can simplify that a bit and assign
-the result of the ternary directly to a variable:
+truthy value and as `false` otherwise. We can simplify that a bit and assign the
+result of the ternary directly to a variable:
 
 ```js
 const age = 60;
@@ -643,12 +644,13 @@ canEnlist;
 // => false
 ```
 
-**Top Tip:** Be careful to not overuse the ternary operator. It's fine for
-slimming down a simple `if...else`, but be conscious of how easy your code is
-to understand for an outsider. Remember, you generally write code once, but it
-gets read (by yourself and others) **far** more than once. The ternary is often
-more difficult to quickly interpret than a regular old `if...else`, so make
-sure the reduction in code is worth any potential reduction in readability.
+> **Top Tip:** Be careful to not overuse the ternary operator. It's fine for
+> slimming down a simple `if...else`, but be conscious of how easy your code is
+> to understand for an outsider. Remember, you generally write code once, but it
+> gets read (by yourself and others) **far** more than once. The ternary is
+> often more difficult to quickly interpret than a regular old `if...else`, so
+> make sure the reduction in code is worth any potential reduction in
+> readability.
 
 ### Code Examples
 
@@ -673,20 +675,20 @@ const accountFound = true;
 const passwordMatches = false;
 
 if (email === '') {
-	errorMessage = 'Please provide an email.';
+    errorMessage = 'Please provide an email.';
 } else if (password === '') {
-	errorMessage = 'Please provide a password.';
+    errorMessage = 'Please provide a password.';
 } else {
-	if (accountFound) {
-		if (passwordMatches) {
-			loggedIn = true;
-		} else {
-			errorMessage = "Sorry, that password doesn't match our records.";
-		}
-	} else {
-		errorMessage =
-			'Sorry, no account matching the provided email address was found.';
-	}
+    if (accountFound) {
+        if (passwordMatches) {
+            loggedIn = true;
+        } else {
+            errorMessage = "Sorry, that password doesn't match our records.";
+        }
+    } else {
+        errorMessage =
+            'Sorry, no account matching the provided email address was found.';
+    }
 }
 // => "Sorry, that password doesn't match our records."
 
@@ -711,7 +713,7 @@ const userFullName = 'Ada Lovelace';
 let todaysDate = 'Dec 10';
 
 const birthdayMessage =
-	todaysDate === userBirthday ? `Happy birthday, ${userFullName}!` : '';
+    todaysDate === userBirthday ? `Happy birthday, ${userFullName}!` : '';
 
 birthdayMessage;
 // => "Happy birthday, Ada Lovelace!"
@@ -729,18 +731,18 @@ let canViewProfiles = false;
 let canImpersonateUsers = false;
 
 switch (accountType) {
-	case 'guest':
-		permissionsLevel = 0;
-		break;
-	case 'user':
-		permissionsLevel = 10;
-		canViewProfiles = true;
-		break;
-	case 'admin':
-		permissionsLevel = 20;
-		canViewProfiles = true;
-		canImpersonateUsers = true;
-		break;
+    case 'guest':
+        permissionsLevel = 0;
+        break;
+    case 'user':
+        permissionsLevel = 10;
+        canViewProfiles = true;
+        break;
+    case 'admin':
+        permissionsLevel = 20;
+        canViewProfiles = true;
+        canImpersonateUsers = true;
+        break;
 }
 // => true
 
@@ -766,4 +768,3 @@ able to build.
   - [`if...else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
   - [Conditional (ternary) operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
   - [`switch` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)
-
