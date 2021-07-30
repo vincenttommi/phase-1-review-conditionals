@@ -434,7 +434,7 @@ The first `if` condition checks for the "base level" of adulthood (`age >= 16`),
 and each subsequent nested `if` "adds on." Note that each inner `if` statement
 is nested **inside** the code block of the one before. This means that the inner
 `if` statements will only execute if the outer ones are truthy. This makes
-sense: if age is less than 16, we're done &mdash; there's no need to check the
+sense: if age is less than 16, we're done — there's no need to check the
 remaining conditions because we know they have to be false as well. Otherwise
 JavaScript will keep checking each subsequent condition until it either comes to
 one that is false or finishes running all the code blocks.
