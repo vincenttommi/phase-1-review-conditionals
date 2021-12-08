@@ -183,7 +183,8 @@ Boolean({ firstName: 'Brendan', lastName: 'Eich' });
 
 ## Review How to Use Conditional Statements
 
-JavaScript includes three structures for implementing code conditionally: *if statements*, *switch statements*, and *ternary expressions*.
+JavaScript includes three structures for implementing code conditionally: *if
+statements*, *switch statements*, and *ternary expressions*.
 
 ### `if` statement
 
